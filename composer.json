@@ -1,7 +1,7 @@
 {
-    "name": "davidnineroc/million-hreo",
-    "description": "this is a million-hreo!",
-    "keywords": ["davidnineroc", "million-hreo", "million", "hreo", "百万英雄"],
+    "name": "davidnineroc/million-hero",
+    "description": "this is a million-hero!",
+    "keywords": ["davidnineroc", "million-hero", "million", "hero", "百万英雄"],
     "type": "project",
     "license": "MIT",
     "authors": [
