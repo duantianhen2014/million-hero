@@ -3,8 +3,6 @@
 namespace App\Foundation;
 
 
-use App\Exceptions\ADBException;
-
 class Command
 {
     public static function shellExec($shell)

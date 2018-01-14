@@ -1,7 +1,7 @@
 <?php
 
 if (! function_exists('env')) {
-    function env($key, $default)
+    function env($key, $default = null)
     {
         $value = getenv($key);
 

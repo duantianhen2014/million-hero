@@ -22,7 +22,12 @@ class Application
     public function run()
     {
         // 截图
-        $this->screenShot();
+        $image = $this->getBase64ScreenShot();
+
+        // 请求百度文字识别接口
+        $results = $this->aipOcr->basicGeneral($image, $this->config);
+
+        var_dump($results);
     }
 
     protected function registerAipOcr()
@@ -46,10 +51,22 @@ class Application
         ];
     }
 
-    protected function screenShot()
-    {
-        $output = Command::exactExec('adb shell screencap');
 
-        var_dump($output);exit;
+    protected function getBase64ScreenShot()
+    {
+        $output = $this->getScreenShot();
+
+        file_put_contents('1.png', $output);
+
+        return base64_encode($output);
+    }
+
+    protected function getScreenShot()
+    {
+        // 直接获取输出
+        $output = Command::shellExec('adb shell screencap -p');
+
+        // here, 在PHP运行就不行，直接通过环境就可以
+        return $output;
     }
 }
