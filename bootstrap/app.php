@@ -9,12 +9,11 @@ try {
 
 }
 
+require __DIR__ . '/helpers.php';
 
 $app = new \App\Application(
     realpath(__DIR__ . '/../')
 );
 
-// 实例化后再加载助手函数
-require __DIR__ . '/helpers.php';
 
 return $app;

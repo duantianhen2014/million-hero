@@ -2,10 +2,8 @@
 
 namespace App;
 
-
 use AipOcr;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use Symfony\Component\Console\Output\Output;
+use App\Foundation\Command;
 
 class Application
 {
@@ -50,6 +48,8 @@ class Application
 
     protected function screenShot()
     {
+        $output = Command::exactExec('adb shell screencap');
 
+        var_dump($output);exit;
     }
 }
