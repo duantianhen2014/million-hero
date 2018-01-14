@@ -9,7 +9,10 @@ try {
 
 }
 
-$app = new \App\Application();
+
+$app = new \App\Application(
+    realpath(__DIR__ . '/../')
+);
 
 // 实例化后再加载助手函数
 require __DIR__ . '/helpers.php';
