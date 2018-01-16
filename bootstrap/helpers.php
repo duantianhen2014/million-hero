@@ -18,12 +18,26 @@ if (! function_exists('dd')) {
     {
         if (is_string($output)) {
             echo $output;
-        } elseif (is_array($output) || is_object($output)) {
-            print $output;
         } else {
             var_dump($output);
         }
 
         exit;
+    }
+}
+
+if (! function_exists('cachePath')) {
+    function cachePath($file = null)
+    {
+        $basePath = \App\Application::getInstance()->getBasePath();
+        $basePath = trim($basePath, '/\\');
+        $cachePath = "{$basePath}/bootstrap/cache/";
+
+        if (! is_null($file)) {
+            $file = str_replace('\\', DIRECTORY_SEPARATOR, $file);
+            $cachePath .= "{$file}";
+        }
+
+        return $cachePath;
     }
 }
