@@ -3,7 +3,10 @@
 namespace App;
 
 use AipOcr;
+use App\Foundation\Answer;
 use App\Foundation\Command;
+use App\Foundation\ReadImage;
+use App\Foundation\ScreenShot;
 
 class Application extends Container
 {
@@ -14,33 +17,23 @@ class Application extends Container
         $this->basePath = $basePath;
 
         $this->registerServices();
-        $this->registerConfig();
-        $this->registerAipOcr();
     }
 
     public function run()
     {
         // 截图
-        $this->screenShot();
+        $image = ScreenShot::getScreenShot();
 
-        exit;
         // 请求百度文字识别接口
-        $results = $this->aipOcr->basicGeneral($image, $this->config);
+        list($question, $a, $b, $c) = ReadImage::getText($image);
 
-        var_dump($results);
+        // 把问题拿去寻求百度
+        Answer::get($question);
     }
 
 
 
-    protected function screenShot()
-    {
-        $tmp = env('TMP_FILE');
-        $cache = cachePath(env('CACHE_FILE'));
 
-        // 直接获取输出
-        Command::shellExec("adb shell screencap -p {$tmp}");
-        Command::shellExec("adb pull {$tmp} {$cache}");
-    }
 
 
 }
