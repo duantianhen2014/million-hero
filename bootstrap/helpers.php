@@ -1,5 +1,19 @@
 <?php
 
+// 随时使用 config
+function config($key) {
+    static $instance;
+
+    if (is_null($instance)) {
+        $instance['aip'] = require ROOT_PATH . '/config/aip.php';
+        $instance['cache'] = require ROOT_PATH . '/config/cache.php';
+    }
+
+    list($file, $key) = explode('.', $key);
+    return $instance[$file][$key];
+};
+
+// 打印
 function dd($output)
 {
     if (is_string($output)) {
@@ -12,21 +26,20 @@ function dd($output)
 }
 
 
-/**
- *
- */
+// 调用 adb 截屏
 function screenShot()
 {
-    $cacheFile =
+    $tmp = config('cache.tmp');
+    $cache = config('cache.file');
 
-    // 处理图片大小
+    // 直接获取输出
+    shell_exec("adb shell screencap -p {$tmp}");
+    shell_exec("adb pull {$tmp} {$cache}");
 
-
-    $image = file_get_contents($cache);
-
-    return $image;
+    return $cache;
 }
 
+// 缩小图片，防止图片太大不好传输
 function resizeImage($file, $width = 520)
 {
     $handle = imagecreatefrompng($file);
@@ -46,4 +59,42 @@ function resizeImage($file, $width = 520)
     imagedestroy($handle);
     imagepng($dst, $file);
     imagedestroy($dst);
+}
+
+
+function requestAipOcr($image)
+{
+    static $instance;
+
+    if (is_null($instance)) {
+        require ROOT_PATH . '/app/Support/AipOcr.php';
+        $instance = new AipOcr(config('aip.APP_ID'), config('aip.API_KEY'), config('aip.SECRET_KEY'));
+    }
+
+    $response = $instance->basicGeneral($image);
+
+    $words_result = unsetArrKey($response['words_result']);
+
+    // 去最后三个答案
+    $c = array_pop($words_result);
+    $b = array_pop($words_result);
+    $a = array_pop($words_result);
+
+    // 去最后一个
+    $questions = implode(',', $words_result);
+    $questions = trim($questions, '?？');
+
+    return [$questions, $a, $b, $c];
+}
+
+/**
+ * 抓换二维数组成为以为索引数组
+ */
+function unsetArrKey($words_result, $realKey = 'words')
+{
+    foreach ($words_result as $key => $word) {
+        $words_result[$key] = $word[$realKey];
+    }
+
+    return $words_result;
 }
