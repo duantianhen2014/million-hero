@@ -3,6 +3,7 @@
 define('ROOT_PATH', __DIR__);
 
 // 加载助手函数
+require ROOT_PATH . '/vendor/autoload.php';
 require ROOT_PATH . '/bootstrap/helpers.php';
 
 // 截图
@@ -12,6 +13,12 @@ $file = config('cache.file');
 resizeImage($file);
 
 // 请求百度文字识别接口
-$text = requestAipOcr(file_get_contents($file));
+list($question, $a, $b, $c) = requestAipOcr(file_get_contents($file));
 
-var_dump($text);
+// 获取结果集合
+list($aCount, $bCount, $cCount) = getResultCount($question, compact('a', 'b', 'c'));
+
+// 输出题目和答案
+echo getTableText([" 题目: {$question}", " A: {$a}", " B: {$b}", " C: {$c}"]);
+
+

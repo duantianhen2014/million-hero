@@ -1,0 +1,13 @@
+{
+    "name": "waitmoonman/million-hero",
+    "authors": [
+        {
+            "name": "DavidNineRoc",
+            "email": "1033404553@qq.com"
+        }
+    ],
+    "require": {
+        "bupt1987/html-parser": "dev-master",
+        "imangazaliev/didom": "^1.13"
+    }
+}

@@ -98,3 +98,60 @@ function unsetArrKey($words_result, $realKey = 'words')
 
     return $words_result;
 }
+
+function getTableText($array)
+{
+    $max = 0;
+    $parameters = [];
+    $text = "+%s+\n";
+
+    foreach ($array as $value) {
+        $text .= "|%s|\n";
+        $parameters[] = $value;
+        if ($max < strlen($value)) {
+            $max = strlen($value);
+        }
+
+    }
+
+    array_unshift($parameters, str_repeat('-', $max));
+    // 替换最大宽度
+    $text = str_replace('%s', "%-{$max}s", $text);
+
+    // 正则替换
+    return sprintf($text, ...$parameters);
+}
+
+
+function getAnswer($word, $ans)
+{
+    getResultCount($word, ['a' => '滕王阁', 'b' => '施国鹏', 'c' =>'大一']);
+
+exit;
+}
+
+function getResultCount($word, $answers)
+{
+    $getCount = function($text) {
+        $text = str_replace(',', '', $text);
+        $count = trim($text,'搜索工具百度为您找到相关结果约,个');
+        return $count;
+    };
+
+
+    $results = [];
+    foreach ($answers as $key => $answer) {
+        // 获取结果集合
+        $document = new DiDom\Document(
+            'http://www.baidu.com/s?wd='.urlencode($word . ' ' . $answer)
+            , true
+        );
+        $posts = $document->find('.nums');
+        foreach($posts as $post) {
+            // 每个问题+选项的搜索结果数量
+            $results[$key] = (int)$getCount($post->text());
+        }
+    }
+
+    return $results;
+}
