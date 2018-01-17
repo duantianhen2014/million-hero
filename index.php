@@ -18,7 +18,17 @@ list($question, $a, $b, $c) = requestAipOcr(file_get_contents($file));
 // 获取结果集合
 list($aCount, $bCount, $cCount) = getResultCount($question, compact('a', 'b', 'c'));
 
-// 输出题目和答案
-echo getTableText([" 题目: {$question}", " A: {$a}", " B: {$b}", " C: {$c}"]);
+// 输出结果数
+echo getTableText(
+    " 题目: {$question}",
+    [
+        $a . ' ' . $aCount,
+        $b . ' ' .  $bCount,
+        $c . ' ' .  $cCount
+    ]
+);
+exit;
+// 获取百度结果
+echo getAnswer($question);
 
 

@@ -99,38 +99,46 @@ function unsetArrKey($words_result, $realKey = 'words')
     return $words_result;
 }
 
-function getTableText($array)
+function getTableText($question, $answers)
 {
-    $max = 0;
-    $parameters = [];
+    $max = strlen($question);
+    // 头部
     $text = "+%s+\n";
+    // 放入问题
+    $text .= "|%s|\n";
+    $parameters[] = $question;
 
-    foreach ($array as $value) {
+    // 放入答案
+    foreach ($answers as $answer) {
+        // 第一个是答案，第二个是匹配的结果数
         $text .= "|%s|\n";
-        $parameters[] = $value;
-        if ($max < strlen($value)) {
-            $max = strlen($value);
+        $parameters[] = $answer;
+        // 获取最大字符数
+        if ($max < strlen($answer)) {
+            $max = strlen($answer);
         }
 
     }
 
     array_unshift($parameters, str_repeat('-', $max));
     // 替换最大宽度
-    $text = str_replace('%s', "%-{$max}s", $text);
+    $text = str_replace('%s', "%s", $text);
 
     // 正则替换
     return sprintf($text, ...$parameters);
 }
 
 
-function getAnswer($word, $ans)
+function getAnswer($question)
 {
-    getResultCount($word, ['a' => '滕王阁', 'b' => '施国鹏', 'c' =>'大一']);
+    $document = new DiDom\Document('http://www.baidu.com/s?wd='.urlencode($question), true);
 
-exit;
+    $text = $document->find('.c-container')[0]->text();
+    $text = preg_replace('/\s*/', '', $text);
+    return $text;
 }
 
-function getResultCount($word, $answers)
+function getResultCount($question, $answers)
 {
     $getCount = function($text) {
         $text = str_replace(',', '', $text);
@@ -143,14 +151,12 @@ function getResultCount($word, $answers)
     foreach ($answers as $key => $answer) {
         // 获取结果集合
         $document = new DiDom\Document(
-            'http://www.baidu.com/s?wd='.urlencode($word . ' ' . $answer)
+            'http://www.baidu.com/s?wd='.urlencode($question . ' ' . $answer)
             , true
         );
         $posts = $document->find('.nums');
-        foreach($posts as $post) {
-            // 每个问题+选项的搜索结果数量
-            $results[$key] = (int)$getCount($post->text());
-        }
+        // 每个问题+选项的搜索结果数量
+        $results[] = (int)$getCount($posts[0]->text());
     }
 
     return $results;
