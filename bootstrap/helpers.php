@@ -1,43 +1,49 @@
 <?php
 
-if (! function_exists('env')) {
-    function env($key, $default = null)
-    {
-        $value = getenv($key);
-
-        if ($value === false) {
-            $value = $default;
-        }
-
-        return $value;
+function dd($output)
+{
+    if (is_string($output)) {
+        echo $output;
+    } else {
+        var_dump($output);
     }
+
+    exit;
 }
 
-if (! function_exists('dd')) {
-    function dd($output)
-    {
-        if (is_string($output)) {
-            echo $output;
-        } else {
-            var_dump($output);
-        }
 
-        exit;
-    }
+/**
+ *
+ */
+function screenShot()
+{
+    $cacheFile =
+
+    // 处理图片大小
+
+
+    $image = file_get_contents($cache);
+
+    return $image;
 }
 
-if (! function_exists('cachePath')) {
-    function cachePath($file = null)
-    {
-        $basePath = \App\Application::getInstance()->getBasePath();
-        $basePath = trim($basePath, '/\\');
-        $cachePath = "{$basePath}/bootstrap/cache/";
+function resizeImage($file, $width = 520)
+{
+    $handle = imagecreatefrompng($file);
 
-        if (! is_null($file)) {
-            $file = str_replace('\\', DIRECTORY_SEPARATOR, $file);
-            $cachePath .= "{$file}";
-        }
+    $x = imagesx($handle);
+    $y = imagesy($handle);
 
-        return $cachePath;
+    $height = $y/$x*$width;
+    $dst = imagecreatetruecolor($width, $height);
+    // 百万英雄，截图大小 70, 300, $w-100,900
+    if ($y > 900) {
+        $y = 900;
     }
+
+    imagecopyresized($dst, $handle, 0, 0, 70, 300, $width, $height, $x-100, $y);
+
+    imagedestroy($handle);
+    imagepng($dst, $file);
+    imagedestroy($dst);
 }

@@ -51,20 +51,6 @@ class ReadImage
 
 
 
-    protected static function getConfig()
-    {
-        if (is_null(self::$config)) {
-            self::$config = [
-                'language_type' => env('LANGUAGE_TYPE', 'CHN_ENG'),
-                'detect_direction' => env('DETECT_DIRECTION', 'false'),
-                'detect_language' => env('DETECT_LANGUAGE', 'false'),
-                'probability' => env('PROBABILITY', 'false'),
-            ];
-        }
-
-        return self::$config;
-    }
-
     protected static function getFormatText($words_result)
     {
         $words_result = self::unsetArrKey($words_result);
