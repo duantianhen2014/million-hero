@@ -28,23 +28,24 @@ class Request
      */
     function getResultCount($question, $answers)
     {
-        $getCount = function($text) {
-            $text = str_replace(',', '', $text);
-            $count = trim($text,'搜索工具百度为您找到相关结果约,个');
-            return $count;
-        };
-
-
         $results = [];
         foreach ($answers as $key => $answer) {
             // 获取结果集合
             $this->document->loadHtmlFile('http://www.baidu.com/s?wd='.urlencode($question . ' ' . $answer));
 
             $posts = $this->document->find('.nums');
+
             // 每个问题+选项的搜索结果数量
-            $results[] = (int)$getCount($posts[0]->text());
+            $results[] = (int)$this->getCount($posts[0]->text());
         }
 
         return $results;
+    }
+
+    protected function getCount($text)
+    {
+        $text = str_replace(',', '', $text);
+        $count = trim($text,'搜索工具百度为您找到相关结果约,个');
+        return $count;
     }
 }

@@ -1,9 +1,8 @@
 <?php
 
 
-    define('ROOT_PATH', __DIR__);
+$app = require __DIR__ . '/bootstrap/app.php';
 
 
-    $app = require ROOT_PATH . '/bootstrap/app.php';
-
-    $app->run();
+// 使用异步请求
+$app->run();
