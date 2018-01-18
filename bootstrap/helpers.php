@@ -99,35 +99,6 @@ function unsetArrKey($words_result, $realKey = 'words')
     return $words_result;
 }
 
-function getTableText($question, $answers)
-{
-    $max = strlen($question);
-    // 头部
-    $text = "+%s+\n";
-    // 放入问题
-    $text .= "|%s|\n";
-    $parameters[] = $question;
-
-    // 放入答案
-    foreach ($answers as $answer) {
-        // 第一个是答案，第二个是匹配的结果数
-        $text .= "|%s|\n";
-        $parameters[] = $answer;
-        // 获取最大字符数
-        if ($max < strlen($answer)) {
-            $max = strlen($answer);
-        }
-
-    }
-
-    array_unshift($parameters, str_repeat('-', $max));
-    // 替换最大宽度
-    $text = str_replace('%s', "%s", $text);
-
-    // 正则替换
-    return sprintf($text, ...$parameters);
-}
-
 
 function getAnswer($question)
 {

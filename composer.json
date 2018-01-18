@@ -8,6 +8,7 @@
     ],
     "require": {
         "bupt1987/html-parser": "dev-master",
-        "imangazaliev/didom": "^1.13"
+        "imangazaliev/didom": "^1.13",
+        "phplucidframe/console-table": "^1.2"
     }
 }
