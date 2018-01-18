@@ -10,5 +10,10 @@
         "bupt1987/html-parser": "dev-master",
         "imangazaliev/didom": "^1.13",
         "phplucidframe/console-table": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
     }
 }
