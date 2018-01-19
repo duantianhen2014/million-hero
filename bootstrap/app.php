@@ -42,7 +42,9 @@ $app->bind('request', function(){
         new \DiDom\Document()
     );
 });
-
-
+// 异步请求
+$app->bind('client', \GuzzleHttp\Client::class);
+// 解析 HTML
+$app->bind('parse', \HtmlParser\ParserDom::class);
 
 return $app;

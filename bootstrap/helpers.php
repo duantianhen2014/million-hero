@@ -17,3 +17,9 @@ function splitZh($string, $limit, $end) : string
 
     return $string;
 }
+
+function dd(...$parameters)
+{
+    var_dump($parameters);
+    exit;
+}

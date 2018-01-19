@@ -19,6 +19,8 @@ class Request
         $this->document->loadHtmlFile('http://www.baidu.com/s?wd='.urlencode($question));
 
         $text = $this->document->find('.c-container')[0]->text();
+        $text .= $this->document->find('.c-container')[1]->text();
+        $text .= $this->document->find('.c-container')[2]->text();
         $text = preg_replace('/\s*/', '', $text);
         return $text;
     }

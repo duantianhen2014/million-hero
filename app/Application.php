@@ -3,6 +3,12 @@
 namespace App;
 
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Pool;
+use GuzzleHttp\Psr7\Request;
+use Psr\Http\Message\ResponseInterface;
+
 class Application extends Container
 {
     protected $startTime;
@@ -27,7 +33,42 @@ class Application extends Container
             $c
         ) = $this->make('api')->requestText(file_get_contents($file));
 
-        // 获取结果集合
+
+        // 发送异步请求
+        $requests = function ($url) {
+
+            foreach ($url as $uri) {
+                yield new Request('GET', $uri);
+            }
+        };
+        $pool = new Pool(
+            $this->make('client'),
+            $requests([
+                'a'   => 'http://www.baidu.com/s?wd='.urlencode($question . ' ' . $a),
+                'b'   => 'http://www.baidu.com/s?wd='.urlencode($question . ' ' . $b),
+                'c'   => 'http://www.baidu.com/s?wd='.urlencode($question . ' ' . $c),
+                'detail' => 'http://www.baidu.com/s?wd='.urlencode($question),
+            ]),
+            [
+            'concurrency' => 1,
+            'fulfilled' => function ($response, $index) {
+                $parse = $this->make('parse');
+                $parse->load($response->getBody()->getContents());
+                var_dump($parse->find('.nums')[0]->getPlainText());
+            },
+            'rejected' => function ($reason, $index) {
+                // this is delivered each failed request
+            },
+        ]);
+        // Initiate the transfers and create a promise
+        $promise = $pool->promise();
+        // Force the pool of requests to complete.
+        $promise->wait();
+
+        exit;
+        var_dump(111);
+        sleep(10);
+        // 异步获取结果集
         list(
             $aCount,
             $bCount,
@@ -56,10 +97,7 @@ class Application extends Container
                 'answer' => $cCount
             ],
         ]);
-
         echo $table->renderTable();
-
-
 
 
         // 获取百度结果

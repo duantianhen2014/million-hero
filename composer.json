@@ -9,7 +9,9 @@
     "require": {
         "imangazaliev/didom": "^1.13",
         "intervention/image": "^2.4",
-        "malios/php-to-ascii-table": "^1.0"
+        "malios/php-to-ascii-table": "^1.0",
+        "guzzlehttp/guzzle": "6.2",
+        "bupt1987/html-parser": "dev-master"
     },
     "autoload": {
         "psr-4": {
