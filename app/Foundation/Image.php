@@ -35,7 +35,7 @@ class Image
         imagedestroy($this->src);
 
         if (! is_null($path)) {
-            $this->path = $this->path;
+            $this->path = $path;
         }
 
         imagepng($this->dst, $this->path);

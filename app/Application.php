@@ -17,7 +17,7 @@ class Application extends Container
         // 截图
         $file = $this->make('screen')->capture();
         // 调整图片大小
-        $this->make('image')->cut($file);
+        $this->make('image')->cut($file)->save();
 
         // 请求百度文字识别接口
         list(
@@ -49,6 +49,7 @@ class Application extends Container
 
         // 获取百度结果
         echo $this->make('request')->getAnswer($question);
+        $this->runTime();
     }
 
     public function runTime()
