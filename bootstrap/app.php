@@ -7,7 +7,7 @@ $app = new \App\Application(
     microtime(true)
 );
 
-
+require __DIR__ . '/helpers.php';
 
 // 图片处理
 $app->bind('image', \App\Foundation\Image::class);

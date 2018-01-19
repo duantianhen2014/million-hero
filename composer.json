@@ -7,9 +7,7 @@
         }
     ],
     "require": {
-        "bupt1987/html-parser": "dev-master",
         "imangazaliev/didom": "^1.13",
-        "phplucidframe/console-table": "^1.2",
         "intervention/image": "^2.4",
         "malios/php-to-ascii-table": "^1.0"
     },

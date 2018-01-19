@@ -4,50 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3706a38ad2eff85f32f127724407a29",
+    "content-hash": "0506da044be05689fefb4e886ddb2c7b",
     "packages": [
-        {
-            "name": "bupt1987/html-parser",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bupt1987/html-parser.git",
-                "reference": "a30c4fc9355acf869167cbc8a78ccb72c608d8ab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/bupt1987/html-parser/a30c4fc9355acf869167cbc8a78ccb72c608d8ab.zip",
-                "reference": "a30c4fc9355acf869167cbc8a78ccb72c608d8ab",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "HtmlParser\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "俊杰jerry",
-                    "email": "bupt1987@gmail.com",
-                    "homepage": "http://bupt1987.github.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Html Parser",
-            "homepage": "https://github.com/bupt1987/html-parser",
-            "time": "2016-08-19 03:50:49"
-        },
         {
             "name": "guzzlehttp/psr7",
             "version": "1.4.2",
@@ -325,46 +283,6 @@
             "time": "2017-08-03T02:03:34+00:00"
         },
         {
-            "name": "phplucidframe/console-table",
-            "version": "v1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phplucidframe/console-table.git",
-                "reference": "1d8d989e84ce99dc146619bce233a85d46e326ab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/phplucidframe/console-table/1d8d989e84ce99dc146619bce233a85d46e326ab.zip",
-                "reference": "1d8d989e84ce99dc146619bce233a85d46e326ab",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "LucidFrame\\": "src/",
-                    "LucidFrameTest\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sithu K.",
-                    "email": "cithukyaw@gmail.com"
-                }
-            ],
-            "description": "Console Table",
-            "time": "2017-12-24T12:17:32+00:00"
-        },
-        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -418,9 +336,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bupt1987/html-parser": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

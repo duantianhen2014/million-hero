@@ -64,7 +64,8 @@ class Application extends Container
 
         // 获取百度结果
         $answer = $this->make('request')->getAnswer($question);
-        echo "\n{$answer}";
+        echo "\n" . splitZh($answer, 20, "\n");
+
         $this->runTime();
     }
 
