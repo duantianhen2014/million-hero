@@ -12,7 +12,7 @@ $app = new \App\Application(
 // 图片处理
 $app->bind('image', \App\Foundation\Image::class);
 // 表格输出
-$app->bind('table', \LucidFrame\Console\ConsoleTable::class);
+$app->bind('table', \AsciiTable\Builder::class);
 // 配置
 $app->bind('config', function(){
     return new \App\Foundation\Config(__DIR__ . '/../config');

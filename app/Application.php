@@ -37,18 +37,34 @@ class Application extends Container
             );
 
         // 输出结果集
-        $this->make('table')->setHeaders(['问题', $question])
-            ->addRow(['答案', '关联数'])
-            ->addBorderLine()
-            ->addRow([$a, $aCount])
-            ->addRow([$b, $bCount])
-            ->addRow([$c, $cCount])
-            ->setPadding(5)
-            ->display();
+        $table = $this->make('table');
+        $table->addRows([
+            [
+                'option' => '问题',
+                'answer' => $question
+            ],
+            [
+                'option' => $a,
+                'answer' => $aCount
+            ],
+            [
+                'option' => $b,
+                'answer' => $bCount
+            ],
+            [
+                'option' => $c,
+                'answer' => $cCount
+            ],
+        ]);
+
+        echo $table->renderTable();
+
+
 
 
         // 获取百度结果
-        echo $this->make('request')->getAnswer($question);
+        $answer = $this->make('request')->getAnswer($question);
+        echo "\n{$answer}";
         $this->runTime();
     }
 
