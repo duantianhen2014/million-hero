@@ -34,47 +34,13 @@ class Application extends Container
         ) = $this->make('api')->requestText(file_get_contents($file));
 
 
-        // 发送异步请求
-        $requests = function ($url) {
-
-            foreach ($url as $uri) {
-                yield new Request('GET', $uri);
-            }
-        };
-        $pool = new Pool(
-            $this->make('client'),
-            $requests([
-                'a'   => 'http://www.baidu.com/s?wd='.urlencode($question . ' ' . $a),
-                'b'   => 'http://www.baidu.com/s?wd='.urlencode($question . ' ' . $b),
-                'c'   => 'http://www.baidu.com/s?wd='.urlencode($question . ' ' . $c),
-                'detail' => 'http://www.baidu.com/s?wd='.urlencode($question),
-            ]),
-            [
-            'concurrency' => 1,
-            'fulfilled' => function ($response, $index) {
-                $parse = $this->make('parse');
-                $parse->load($response->getBody()->getContents());
-                var_dump($parse->find('.nums')[0]->getPlainText());
-            },
-            'rejected' => function ($reason, $index) {
-                // this is delivered each failed request
-            },
-        ]);
-        // Initiate the transfers and create a promise
-        $promise = $pool->promise();
-        // Force the pool of requests to complete.
-        $promise->wait();
-
-        exit;
-        var_dump(111);
-        sleep(10);
-        // 异步获取结果集
+        // 获取相关结果集合
         list(
             $aCount,
             $bCount,
             $cCount
         ) = $this->make('request')->getResultCount(
-                $question, compact('a', 'b', 'c')
+                $question, [$a, $b, $c]
             );
 
         // 输出结果集
@@ -97,12 +63,12 @@ class Application extends Container
                 'answer' => $cCount
             ],
         ]);
-        echo $table->renderTable();
+        response($table->renderTable());
 
 
-        // 获取百度结果
-        $answer = $this->make('request')->getAnswer($question);
-        echo "\n" . splitZh($answer, 20, "\n");
+        // 获取相关结果
+        $answer = $this->make('request')->getAnswer($question, $this->make('config')->get('app.result_count'));
+        responseLine(splitZh($answer, 20, "\n"));
 
         $this->runTime();
     }

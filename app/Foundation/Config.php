@@ -6,7 +6,7 @@ namespace App\Foundation;
 class Config
 {
     protected $config = [];
-    protected $files = ['aip', 'cache'];
+    protected $files = ['aip', 'cache', 'app'];
 
     public function __construct($configPath)
     {

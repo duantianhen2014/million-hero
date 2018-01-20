@@ -18,8 +18,15 @@ function splitZh($string, $limit, $end) : string
     return $string;
 }
 
-function dd(...$parameters)
+
+function responseLine($response)
 {
-    var_dump($parameters);
-    exit;
+    echo "\n";
+    response($response);
+    echo "\n";
+}
+
+function response($response)
+{
+    echo $response;
 }
