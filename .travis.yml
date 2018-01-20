@@ -3,7 +3,7 @@ php:
   - '7.0'
 
 install:
-  - composer install --prefer-dist --optimize-autoloader --no-interaction
+  - composer install
 
 notifications:
   email:
