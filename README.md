@@ -4,13 +4,19 @@
 <a href="https://packagist.org/packages/davidnineroc/million-hero"><img src="https://poser.pugx.org/davidnineroc/million-hero/downloads" alt="Downloads"></a>
 <a href="https://packagist.org/packages/davidnineroc/million-hero"><img src="https://poser.pugx.org/davidnineroc/million-hero/license" alt="License"></a>
 </p> 
+
 ## Usage
-1. 使用`composer`安装
+1. 环境要求
+   * PHP >= 7.0 (如果不是PHP程序员可以直接下载[phpstudy](http://www.phpstudy.net/))
+   * composer [下载地址](http://www.phpcomposer.com/)
+   * ADB 驱动 [下载地址](https://adb.clockworkmod.com/)
+   * 以上请配置好环境变量 [配置方法](http://blog.shiguopeng.cn/article/10201.html)
+2. 使用`composer`安装
 ```shell
 composer require davidnineroc/qrcodeplus
 ```
-2. 按需配置`/config/*`下文件
-3. 在根目录执行
+3. 按需配置`/config/*`下文件
+4. 在根目录执行
     * 测试运行环境(如果通过就可以正常使用了)
     * `php test`
     * 运行项目
