@@ -4,6 +4,8 @@ namespace App;
 
 class Application extends Container
 {
+    use TestEnv;
+
     protected $startTime;
 
     public function __construct($startTime = 0)

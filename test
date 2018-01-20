@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+
+$app = require __DIR__.'/bootstrap/app.php';
+
+$array = $app->testAdbDriverEnv()
+                ->testAdbConnectEnv()
+                ->testAdbScreenEnv()
+                ->getTestStatus();
+
+
+($table = $app->make('table'))->addRows($array);
+
+response($table->renderTable());
+
