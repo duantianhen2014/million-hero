@@ -20,7 +20,6 @@ class ConfigTest extends TestCase
         return $config;
     }
 
-
     /**
      * @depends testConfig
      */
