@@ -36,8 +36,9 @@ composer create-project davidnineroc/million-hero
     * 模拟器的话重启
     ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env2.png)
 * 成功
-    ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env4.png)
-* `php artisan`如果执行失败，请[Issure](https://github.com/DavidNineRoc/million-hero/issues)    
+    ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env3.png)
+* `php artisan`如果执行失败，请[Issure](https://github.com/DavidNineRoc/million-hero/issues)   
+  ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env4.png)
 ## Reference
 * [wangtonghe/hq-answer-assist](https://github.com/wangtonghe/hq-answer-assist)
 ## TODO
