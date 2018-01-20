@@ -34,7 +34,7 @@ composer create-project davidnineroc/million-hero
 * 手机未连接
     * 手机拔出USB重新连接,开启调试模式
     * 模拟器的话重启
-    ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env2.png)
+    ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/envenv2.png)
 * 成功
     ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env3.png)
 * `php artisan`如果执行失败，请[Issure](https://github.com/DavidNineRoc/million-hero/issues)   
