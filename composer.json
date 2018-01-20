@@ -6,6 +6,8 @@
             "email": "1033404553@qq.com"
         }
     ],
+    "type": "project",
+    "license": "MIT",
     "require": {
         "imangazaliev/didom": "^1.13",
         "malios/php-to-ascii-table": "^1.0"
