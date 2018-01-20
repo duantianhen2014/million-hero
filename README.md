@@ -1,3 +1,7 @@
+![adb环境](http://p2uena5sd.bkt.clouddn.com//million/envmillion.gif)
+
+* gif图显示时间这么久的原因是开着录屏，电脑卡顿，硬盘读写只有 350k/s 速度
+****
 <p align="center">
 <a href="https://packagist.org/packages/davidnineroc/million-hreo"><img src="https://travis-ci.org/DavidNineRoc/million-hero.svg?branch=master" alt="Build Status"></a>
 <a href="https://styleci.io/repos/117396091"><img src="https://styleci.io/repos/117396091/shield?branch=master" alt="StyleCI"></a>
