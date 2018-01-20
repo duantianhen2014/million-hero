@@ -2,15 +2,15 @@
 
 namespace App;
 
-
 use Closure;
 
 class Container
 {
     protected static $instance;
-    protected $binds = [];
-    protected $instances = [];
 
+    protected $binds = [];
+
+    protected $instances = [];
 
     public function bind($name, $abstract)
     {
@@ -19,7 +19,7 @@ class Container
 
     public function make($name)
     {
-        if (! isset($this->instances[$name])) {
+        if (!isset($this->instances[$name])) {
             $this->instances[$name] = $this->resolve($name);
         }
 
@@ -33,12 +33,11 @@ class Container
         if ($abstract instanceof Closure) {
             $instance = call_user_func($abstract);
         } else {
-            $instance = new $abstract;
+            $instance = new $abstract();
         }
 
         return $instance;
     }
-
 
     public static function getInstance()
     {

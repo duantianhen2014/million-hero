@@ -18,26 +18,30 @@
 require_once 'lib/AipBase.php';
 
 /**
- * 百度语音
+ * 百度语音.
  */
-class AipSpeech extends AipBase{
-
+class AipSpeech extends AipBase
+{
     /**
-     * url
+     * url.
+     *
      * @var string
      */
     public $asrUrl = 'http://vop.baidu.com/server_api';
 
     /**
-     * url
+     * url.
+     *
      * @var string
      */
     public $ttsUrl = 'http://tsn.baidu.com/text2audio';
 
     /**
-     * 判断认证是否有权限
-     * @param  array   $authObj 
-     * @return boolean          
+     * 判断认证是否有权限.
+     *
+     * @param array $authObj
+     *
+     * @return bool
      */
     protected function isPermission($authObj)
     {
@@ -45,24 +49,25 @@ class AipSpeech extends AipBase{
     }
 
     /**
-     * 处理请求参数
+     * 处理请求参数.
+     *
      * @param string $url
-     * @param array $params
-     * @param array $data
-     * @param array $headers
+     * @param array  $params
+     * @param array  $data
+     * @param array  $headers
      */
-    protected function proccessRequest($url, &$params, &$data, $headers){
-
+    protected function proccessRequest($url, &$params, &$data, $headers)
+    {
         $token = isset($params['access_token']) ? $params['access_token'] : '';
 
-        if(empty($data['cuid'])){
+        if (empty($data['cuid'])) {
             $data['cuid'] = md5($token);
         }
 
-        if($url === $this->asrUrl){
+        if ($url === $this->asrUrl) {
             $data['token'] = $token;
             $data = json_encode($data);
-        }else{
+        } else {
             $data['tok'] = $token;
         }
 
@@ -70,16 +75,19 @@ class AipSpeech extends AipBase{
     }
 
     /**
-     * 格式化结果
+     * 格式化结果.
+     *
      * @param $content string
+     *
      * @return mixed
      */
-    protected function proccessResult($content){
+    protected function proccessResult($content)
+    {
         $obj = json_decode($content, true, 512, JSON_BIGINT_AS_STRING);
 
-        if($obj === null){
+        if (null === $obj) {
             $obj = array(
-                '__json_decode_error' => $content
+                '__json_decode_error' => $content,
             );
         }
 
@@ -87,16 +95,18 @@ class AipSpeech extends AipBase{
     }
 
     /**
-     * @param  string $speech
-     * @param  string $format
-     * @param  int $rate
-     * @param  array $options
+     * @param string $speech
+     * @param string $format
+     * @param int    $rate
+     * @param array  $options
+     *
      * @return array
      */
-    public function asr($speech, $format, $rate, $options=array()){
+    public function asr($speech, $format, $rate, $options = array())
+    {
         $data = array();
 
-        if(!empty($speech)){
+        if (!empty($speech)) {
             $data['speech'] = base64_encode($speech);
             $data['len'] = strlen($speech);
         }
@@ -105,34 +115,35 @@ class AipSpeech extends AipBase{
         $data['rate'] = $rate;
         $data['channel'] = 1;
 
-        $data = array_merge($data, $options);  
+        $data = array_merge($data, $options);
 
         return $this->request($this->asrUrl, $data, array());
     }
 
     /**
-     * @param  string $text
-     * @param  string $lang
-     * @param  int $ctp
-     * @param  array $options
+     * @param string $text
+     * @param string $lang
+     * @param int    $ctp
+     * @param array  $options
+     *
      * @return array
      */
-    public function synthesis($text, $lang='zh', $ctp=1, $options=array()){
+    public function synthesis($text, $lang = 'zh', $ctp = 1, $options = array())
+    {
         $data = array();
 
         $data['tex'] = $text;
         $data['lan'] = $lang;
         $data['ctp'] = $ctp;
 
-        $data = array_merge($data, $options);  
+        $data = array_merge($data, $options);
 
         $result = $this->request($this->ttsUrl, $data, array());
 
-        if(isset($result['__json_decode_error'])){
+        if (isset($result['__json_decode_error'])) {
             return $result['__json_decode_error'];
         }
 
         return $result;
     }
-
 }

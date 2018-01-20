@@ -2,10 +2,10 @@
 
 namespace App\Foundation;
 
-
 class ScreenShot
 {
     protected $tmpFile;
+
     protected $cacheFile;
 
     public function __construct($tmpFile, $cacheFile)

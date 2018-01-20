@@ -2,12 +2,12 @@
 
 namespace App\Foundation;
 
-
 use AipOcr;
 
 class Api
 {
     protected $client;
+
     public function __construct(AipOcr $aipOcr)
     {
         $this->client = $aipOcr;
@@ -27,20 +27,20 @@ class Api
         // 去最后一个
         $questions = implode(',', $words_result);
         // 取出第一个数字序号和最后一个问号
-        $questions = mb_substr($questions, 1, (mb_strlen($questions)-2), 'UTF-8');
+        $questions = mb_substr($questions, 1, (mb_strlen($questions) - 2), 'UTF-8');
 
         return [$questions, $a, $b, $c];
     }
 
     /**
-     * 抓换二维数组成为以为索引数组
+     * 抓换二维数组成为以为索引数组.
      */
-     protected function unsetArrKey($words_result, $realKey = 'words')
-     {
-         foreach ($words_result as $key => $word) {
-             $words_result[$key] = $word[$realKey];
-         }
+    protected function unsetArrKey($words_result, $realKey = 'words')
+    {
+        foreach ($words_result as $key => $word) {
+            $words_result[$key] = $word[$realKey];
+        }
 
-         return $words_result;
-     }
+        return $words_result;
+    }
 }

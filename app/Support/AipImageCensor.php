@@ -18,24 +18,27 @@
 require_once 'lib/AipBase.php';
 
 /**
- * 黄反识别
+ * 黄反识别.
  */
-class AipImageCensor extends AipBase{
-
+class AipImageCensor extends AipBase
+{
     /**
-     * antiporn api url
+     * antiporn api url.
+     *
      * @var string
      */
     private $antiPornUrl = 'https://aip.baidubce.com/rest/2.0/antiporn/v1/detect';
 
     /**
-     * antiporn gif api url
+     * antiporn gif api url.
+     *
      * @var string
      */
     private $antiPornGifUrl = 'https://aip.baidubce.com/rest/2.0/antiporn/v1/detect_gif';
 
     /**
-     * antiterror api url
+     * antiterror api url.
+     *
      * @var string
      */
     private $antiTerrorUrl = 'https://aip.baidubce.com/rest/2.0/antiterror/v1/detect';
@@ -56,11 +59,12 @@ class AipImageCensor extends AipBase{
     private $imageCensorUserDefinedUrl = 'https://aip.baidubce.com/rest/2.0/solution/v1/img_censor/user_defined';
 
     /**
-     * @param  string $image 图像读取
+     * @param string $image 图像读取
+     *
      * @return array
      */
-    public function antiPorn($image){
-
+    public function antiPorn($image)
+    {
         $data = array();
         $data['image'] = base64_encode($image);
 
@@ -68,13 +72,14 @@ class AipImageCensor extends AipBase{
     }
 
     /**
-     * @param  string $image 图像读取
+     * @param string $image 图像读取
+     *
      * @return array
      */
-    public function multi_antiporn($images){
-
+    public function multi_antiporn($images)
+    {
         $data = array();
-        foreach($images as $image){
+        foreach ($images as $image) {
             $data[] = array(
                 'image' => base64_encode($image),
             );
@@ -84,11 +89,12 @@ class AipImageCensor extends AipBase{
     }
 
     /**
-     * @param  string $image 图像读取
+     * @param string $image 图像读取
+     *
      * @return array
      */
-    public function antiPornGif($image){
-
+    public function antiPornGif($image)
+    {
         $data = array();
         $data['image'] = base64_encode($image);
 
@@ -96,11 +102,12 @@ class AipImageCensor extends AipBase{
     }
 
     /**
-     * @param  string $image 图像读取
+     * @param string $image 图像读取
+     *
      * @return array
      */
-    public function antiTerror($image){
-
+    public function antiTerror($image)
+    {
         $data = array();
         $data['image'] = base64_encode($image);
 
@@ -108,13 +115,14 @@ class AipImageCensor extends AipBase{
     }
 
     /**
-     * @param  string $images 图像读取
+     * @param string $images 图像读取
+     *
      * @return array
      */
-    public function faceAudit($images, $configId=''){
-
+    public function faceAudit($images, $configId = '')
+    {
         // 非数组则处理为数组
-        if(!is_array($images)){
+        if (!is_array($images)) {
             $images = array(
                 $images,
             );
@@ -124,21 +132,21 @@ class AipImageCensor extends AipBase{
             'configId' => $configId,
         );
 
-        $isUrl = substr(trim($images[0]), 0, 4) === 'http';
-        if(!$isUrl){
+        $isUrl = 'http' === substr(trim($images[0]), 0, 4);
+        if (!$isUrl) {
             $arr = array();
-            
-            foreach($images as $image){
+
+            foreach ($images as $image) {
                 $arr[] = base64_encode($image);
             }
             $data['images'] = implode(',', $arr);
-        }else{
+        } else {
             $urls = array();
-            
-            foreach($images as $url){
+
+            foreach ($images as $url) {
                 $urls[] = urlencode($url);
             }
-            
+
             $data['imgUrls'] = implode(',', $urls);
         }
 
@@ -146,21 +154,22 @@ class AipImageCensor extends AipBase{
     }
 
     /**
-     * @param  string $image 图像读取
+     * @param string $image 图像读取
+     *
      * @return array
      */
-    public function imageCensorComb($image, $scenes='antiporn', $options=array()){
-
+    public function imageCensorComb($image, $scenes = 'antiporn', $options = array())
+    {
         $scenes = !is_array($scenes) ? explode(',', $scenes) : $scenes;
-        
+
         $data = array(
             'scenes' => $scenes,
         );
 
-        $isUrl = substr(trim($image), 0, 4) === 'http';
-        if(!$isUrl){
+        $isUrl = 'http' === substr(trim($image), 0, 4);
+        if (!$isUrl) {
             $data['image'] = base64_encode($image);
-        }else{
+        } else {
             $data['imgUrl'] = $image;
         }
 
@@ -172,20 +181,21 @@ class AipImageCensor extends AipBase{
     }
 
     /**
-     * @param  string $image 图像
+     * @param string $image 图像
+     *
      * @return array
      */
-    public function imageCensorUserDefined($image){
-        
+    public function imageCensorUserDefined($image)
+    {
         $data = array();
 
-        $isUrl = substr(trim($image), 0, 4) === 'http';
-        if(!$isUrl){
+        $isUrl = 'http' === substr(trim($image), 0, 4);
+        if (!$isUrl) {
             $data['image'] = base64_encode($image);
-        }else{
+        } else {
             $data['imgUrl'] = $image;
         }
 
-        return $this->request($this->imageCensorUserDefinedUrl, $data);     
+        return $this->request($this->imageCensorUserDefinedUrl, $data);
     }
 }

@@ -2,12 +2,7 @@
 
 namespace App;
 
-
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
-use Psr\Http\Message\ResponseInterface;
 
 class Application extends Container
 {
@@ -34,7 +29,6 @@ class Application extends Container
             $c
         ) = $this->make('api')->requestText(file_get_contents($file));
 
-
         // 获取相关结果集合
         list(
             $aCount,
@@ -49,23 +43,22 @@ class Application extends Container
         $table->addRows([
             [
                 'option' => '问题',
-                'answer' => $question
+                'answer' => $question,
             ],
             [
                 'option' => $a,
-                'answer' => $aCount
+                'answer' => $aCount,
             ],
             [
                 'option' => $b,
-                'answer' => $bCount
+                'answer' => $bCount,
             ],
             [
                 'option' => $c,
-                'answer' => $cCount
+                'answer' => $cCount,
             ],
         ]);
         response($table->renderTable());
-
 
         // 获取相关结果
         $answer = $this->make('request')->getAnswer($question, $this->make('config')->get('app.result_count'));
@@ -77,7 +70,8 @@ class Application extends Container
     public function runTime()
     {
         // 输出
-        echo "运行时间: " . (microtime(true) - $this->startTime) . "\n";
+        echo '运行时间: '.(microtime(true) - $this->startTime)."\n";
+
         return true;
     }
 
