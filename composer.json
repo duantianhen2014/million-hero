@@ -10,7 +10,6 @@
     "keywords": ["million-hero", "hero"],
     "type": "project",
     "license": "MIT",
-    "minimum-stability": "dev",
     "require": {
         "imangazaliev/didom": "^1.13",
         "malios/php-to-ascii-table": "^1.0"
