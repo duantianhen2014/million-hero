@@ -36,13 +36,16 @@ composer create-project davidnineroc/million-hero
     * 模拟器的话重启
     ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env2.png)
 * 成功
-    ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env3.png)
+    ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env4.png)
 * `php artisan`如果执行失败，请[Issure](https://github.com/DavidNineRoc/million-hero/issues)    
 ## Reference
 * [wangtonghe/hq-answer-assist](https://github.com/wangtonghe/hq-answer-assist)
 ## TODO
+* 网络优化请求接口，截图功能耗时
 * `adb shell screencap -p > screenshot.png` 截图出来的图片总是错误
 * 不要io读写，直接`adb shell screencap -p`获取二进制数据，请求百度接口
+* 优化配置读取
+* 优化程序代码
 * 自动截图    
 ## License
 MIT

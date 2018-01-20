@@ -16,20 +16,23 @@ class Application extends Container
 
     public function run()
     {
-        // 截图
+        // 截图               !!! TODO 这里平均花费 2.5s~3s 时间，换个方法截图，
         $file = $this->make('screen')->capture();
-        // 调整图片大小
+
+        // 调整图片大小        !!! 平均花费 0.2s 左右
         $this->make('image')->cut($file)->save();
 
-        // 请求百度文字识别接口
+        // 请求百度文字识别接口 !!! 平均花费 1s 视情况而定
         list(
             $question,
             $a,
             $b,
             $c
-        ) = $this->make('aip')->requestText(file_get_contents($file));
+        ) = $this->make('aip')->requestText(file_get_contents($this->make('config')->get('cache.file')));
 
-        // 获取相关结果集合
+
+
+        // 获取相关结果集合     !!! 请求三次得到结果集合 花费 2.5 左右，待优化，并发处理
         list(
             $aCount,
             $bCount,
@@ -60,7 +63,7 @@ class Application extends Container
         ]);
         response($table->renderTable());
 
-        // 获取相关结果
+        // 获取相关结果   !!! 1.2s 左右
         $answer = $this->make('request')->getAnswer($question, $this->make('config')->get('app.result_count'));
         responseLine(splitZh($answer, 20, "\n"));
 

@@ -21,7 +21,7 @@ class Request
         // 比较权威一点的答案
         if ($this->document->has('#content_left .result-op')) {
             // 0 ==> 右边的相关 1 == > 权威
-            $text .= "\n*********  权威   ***********\n";
+            $text .= "\n********  权威   **********\n";
             $text .= $this->document->find('#content_left .result-op')[0]->text();
             $text .= "\n\n";
         }
