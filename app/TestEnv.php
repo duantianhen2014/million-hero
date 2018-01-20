@@ -17,7 +17,7 @@ trait TestEnv
         $status = 'SUCCESS';
         // 没有配置环境目录
         if ($code != 0) {
-            $status = 'ERROR';
+            $status = '环境目录未生效';
         }
 
         $this->testStatus[] = [$shell, 'ADB 驱动检测',$status];
@@ -60,9 +60,9 @@ trait TestEnv
 
         // 文件是否存在
         if (is_file($file)) {
-            $status = '截图功能正常';
+            $status = 'SUCCESS';
         } else {
-            $status = 'ERROR';
+            $status = '截图功能错误';
         }
 
         $this->testStatus[] = ['adb shell screencap', '截图功能检测', $status];

@@ -26,6 +26,7 @@ class Api
 
         // 去最后一个
         $questions = implode(',', $words_result);
+
         // 取出第一个数字序号和最后一个问号
         $questions = mb_substr($questions, 1, (mb_strlen($questions) - 2), 'UTF-8');
 

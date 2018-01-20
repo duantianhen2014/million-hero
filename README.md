@@ -25,8 +25,24 @@ composer create-project davidnineroc/million-hero
 ## Errors
 * `/system/bin/sh: can't create xxx: Read-only file system`
     * 目录权限不足，请把项目放到其他盘，一般在桌面都失败
+## Help
+* 执行`php test`有可能出现的情况
+* adb 环境目录未添加
+    * [下载地址adb](https://adb.clockworkmod.com/)
+    * [添加环境目录](http://blog.shiguopeng.cn/article/10201.html)
+    ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env1.png)
+* 手机未连接
+    * 手机拔出USB重新连接,开启调试模式
+    * 模拟器的话重启
+    ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env2.png)
+* 成功
+    ![adb环境](http://p2uena5sd.bkt.clouddn.com//million/env3.png)
+* `php artisan`如果执行失败，请[Issure](https://github.com/DavidNineRoc/million-hero/issues)    
+## Reference
+* [wangtonghe/hq-answer-assist](https://github.com/wangtonghe/hq-answer-assist)
 ## TODO
-* 使用异步请求
+* `adb shell screencap -p > screenshot.png` 截图出来的图片总是错误
+* 不要io读写，直接`adb shell screencap -p`获取二进制数据，请求百度接口
 * 自动截图    
 ## License
 MIT
