@@ -1,0 +1,15 @@
+language: php
+php:
+  - '7.0'
+
+install:
+  - composer install --prefer-dist --optimize-autoloader --no-interaction
+
+notifications:
+  email:
+    recipients:
+      - DavidNineRoc@gmail.com
+    on_success: never
+    on_failure: always
+script:
+  - vendor/bin/phpunit

@@ -13,9 +13,10 @@ class Application extends Container
 {
     protected $startTime;
 
-    public function __construct($startTime)
+    public function __construct($startTime = 0)
     {
         $this->startTime = $startTime;
+        $this->register();
     }
 
     public function run()
@@ -78,5 +79,10 @@ class Application extends Container
         // 输出
         echo "运行时间: " . (microtime(true) - $this->startTime) . "\n";
         return true;
+    }
+
+    protected function register()
+    {
+        static::$instance = $this;
     }
 }

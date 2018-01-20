@@ -1,7 +1,8 @@
 <?php
 
-$app = require __DIR__ . '/bootstrap/app.php';
+use App\Application;
 
+$app = require __DIR__ . '/bootstrap/app.php';
 
 
 $testShell = [
