@@ -25,7 +25,7 @@ class Application extends Container
             $a,
             $b,
             $c
-        ) = $this->make('api')->requestText(file_get_contents($file));
+        ) = $this->make('aip')->requestText(file_get_contents($file));
 
         // 获取相关结果集合
         list(

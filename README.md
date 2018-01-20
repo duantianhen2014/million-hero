@@ -23,7 +23,7 @@ composer create-project davidnineroc/million-hero
     * 运行项目
     * `php artisan`
 ## Errors
-* /system/bin/sh: can't create xxx: Read-only file system
+* `/system/bin/sh: can't create xxx: Read-only file system`
     * 目录权限不足，请把项目放到其他盘，一般在桌面都失败
 ## TODO
 * 使用异步请求

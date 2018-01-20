@@ -1,6 +1,6 @@
 <?php
 
     return [
-        'tmp' => '/cache/screenshot.png',
-        'file' => __DIR__.'/../bootstrap/cache/screenshot.png',
+        'tmp' => '/cache/screen.png',
+        'file' => __DIR__.'/../bootstrap/cache/screen.png',
     ];

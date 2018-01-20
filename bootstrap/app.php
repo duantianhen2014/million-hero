@@ -24,7 +24,7 @@ $app->bind('screen', function () use ($app) {
     );
 });
 // 百度 Aip
-$app->bind('api', function () use ($app) {
+$app->bind('aip', function () use ($app) {
     require __DIR__.'/../app/Support/AipOcr.php';
 
     return new \App\Foundation\Api(
