@@ -2,8 +2,6 @@
 
 namespace App;
 
-use GuzzleHttp\Psr7\Request;
-
 class Application extends Container
 {
     protected $startTime;
