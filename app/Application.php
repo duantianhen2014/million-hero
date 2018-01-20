@@ -30,8 +30,6 @@ class Application extends Container
             $c
         ) = $this->make('aip')->requestText(file_get_contents($this->make('config')->get('cache.file')));
 
-
-
         // 获取相关结果集合     !!! 请求三次得到结果集合 花费 2.5 左右，待优化，并发处理
         list(
             $aCount,
