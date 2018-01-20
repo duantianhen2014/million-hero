@@ -2,7 +2,6 @@
 
 namespace App\Foundation;
 
-
 use DiDom\Document;
 
 class Request
@@ -28,28 +27,29 @@ class Request
         }
 
         // 这个可选配置
-        for ($i = 0; $i < $count; ++ $i) {
+        for ($i = 0; $i < $count; ++$i) {
             $container = $this->document->find('.c-container')[$i];
 
-            if (! $container) {
+            if (!$container) {
                 break;
             }
-            $text .= $container->text();;
+            $text .= $container->text();
         }
 
         $text = preg_replace('/\s*/', '', $text);
+
         return $text;
     }
 
     /**
-     * 获取相关词条数目
+     * 获取相关词条数目.
      */
-    function getResultCount($question, $answers)
+    public function getResultCount($question, $answers)
     {
         $results = [];
         foreach ($answers as $key => $answer) {
             // 获取结果集合
-            $this->document->loadHtmlFile('http://www.baidu.com/s?wd='.urlencode($question . ' ' . $answer));
+            $this->document->loadHtmlFile('http://www.baidu.com/s?wd='.urlencode($question.' '.$answer));
 
             $posts = $this->document->find('.nums');
 
@@ -63,7 +63,8 @@ class Request
     protected function getCount($text)
     {
         $text = str_replace(',', '', $text);
-        $count = trim($text,'搜索工具百度为您找到相关结果约,个');
+        $count = trim($text, '搜索工具百度为您找到相关结果约,个');
+
         return $count;
     }
 }

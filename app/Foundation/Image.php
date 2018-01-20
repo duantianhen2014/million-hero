@@ -2,13 +2,13 @@
 
 namespace App\Foundation;
 
-
 class Image
 {
     protected $dst;
-    protected $src;
-    protected $path;
 
+    protected $src;
+
+    protected $path;
 
     public function cut($path, $width = 520)
     {
@@ -17,7 +17,7 @@ class Image
         $x = imagesx($this->src);
         $y = imagesy($this->src);
 
-        $height = $y/$x*$width;
+        $height = $y / $x * $width;
         $this->dst = imagecreatetruecolor($width, $height);
         // 百万英雄，截图大小 70, 300, $w-100,900
         if ($y > 900) {
@@ -25,7 +25,7 @@ class Image
         }
 
         // 只要答案的区域
-        imagecopyresized($this->dst, $this->src, 0, 0, 70, 300, $width, $height, $x-100, $y);
+        imagecopyresized($this->dst, $this->src, 0, 0, 70, 300, $width, $height, $x - 100, $y);
 
         return $this;
     }
@@ -34,7 +34,7 @@ class Image
     {
         imagedestroy($this->src);
 
-        if (! is_null($path)) {
+        if (!is_null($path)) {
             $this->path = $path;
         }
 
