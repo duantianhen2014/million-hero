@@ -53,17 +53,27 @@ trait TestEnv
         $tmp = $this->make('config')->get('cache.tmp');
         $file = __DIR__.'/../bootstrap/cache/tests/'.time().'.png';
 
-        (new ScreenShot(
-            $tmp,
-            $file)
-        )->capture();
+        $screen = new ScreenShot($tmp, $file);
 
-        // 文件是否存在
-        if (is_file($file)) {
-            $status = 'SUCCESS';
-        } else {
-            $status = '截图功能错误';
-        }
+
+        // 是否可以高速模式
+        $file = $screen->highSpeedCapture();
+
+        do {
+            // 文件是否存在
+            if (is_file($file)) {
+                $status = '高速模式正常';
+                break;
+            }
+
+            $screen->compatibleCapture();
+            if (is_file($file)) {
+                $status = 'SUCCESS | 请把 /config/app.php 切换成兼容模式';
+            } else {
+                $status = '截图功能异常';
+            }
+
+        } while(false);
 
         $this->testStatus[] = ['adb shell screencap', '截图功能检测', $status];
 
