@@ -22,6 +22,7 @@ composer create-project davidnineroc/million-hero
     * 连接手机 (或者运行模拟器)
     * 测试运行环境(如果通过就可以正常使用了)
     * `php test`
+    * /config/app.php > model 有高速和兼容两个模式选择
     * 运行项目
     * `php artisan`
 ## Errors
